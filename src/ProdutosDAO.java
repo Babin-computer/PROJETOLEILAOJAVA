@@ -87,8 +87,33 @@ public class ProdutosDAO {
         return produtos;
     }
     
+    public void venderProduto(String id){
+       //função deve atualizar o status de um produto para “Vendido”.
+       conn = new conectaDAO().connectDB();
+        try{
+            String sql = "UPDATE produtos SET status = 'Vendido' WHERE id = "+id;
+           PreparedStatement st = conn.prepareStatement(sql);
+            st.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Produto Vendido.");
+
+        }catch(SQLException sqle){
+            JOptionPane.showMessageDialog(null,"Produto não encontrado: "+sqle.getMessage());
+
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+
+            }
+        }
+    }
     
-    
+     public ArrayList<ProdutosDTO> listaProdutosVendidos() {
+
+        conn = new conectaDAO().connectDB();
+        ArrayList<ProdutosDTO> produtos = new ArrayList<>();
+        return null;
+     }
         
 }
 
